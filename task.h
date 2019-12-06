@@ -15,8 +15,15 @@ public:
         restart = 3
     };
 
-    Task(QDateTime date_time, int type);
-    int type;
+    enum TimeType {
+        weekly = 10,
+        daily = 11,
+        specify = 12
+    };
+
+    Task(QDateTime date_time, int task_type, int time_type);
+    int task_type;
+    int time_type;
     QDateTime date_time;
 
 };

@@ -19,6 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     std::list<Task *> task_list;
+    std::list<Task *> tmp_list;
 
 private slots:
 

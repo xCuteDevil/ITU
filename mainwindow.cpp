@@ -2,8 +2,10 @@
 #include "ui_mainwindow.h"
 #include "task.h"
 #include <iostream>
+#include <string>
 #include <QTimer>
 #include <QTime>
+#include <QString>
 #include <QDateTime>
 #include <QMessageBox>
 #include <QDebug>
@@ -117,17 +119,24 @@ void MainWindow::RunTask() {
         day = getDay(selectedDay);
         date_time.setDate(day);
 
-        task = new Task(date_time, taskType);
+        task = new Task(date_time, taskType, timeType);
         task_list.push_back(task);
 
         break;
     case 11: //daily
+
         break;
     case 12: //specific time
         break;
 
     }
 
+    this->ShowTasks();
+    QMessageBox::information(
+    this,
+    tr("ShutdownScheduler"),
+    tr("Úkol byl spuštěn")
+    );
 
 }
 
@@ -163,20 +172,93 @@ QDate MainWindow::getDay(int selectedDay) {
 
 void MainWindow::ShowTasks() {
 
+
     ui->tableWidget->clear();
 
     for (unsigned long row = 0; row < task_list.size(); row++) {
 
-        for( int column = 0; column < 3; column++ )
+        Task *tmp_task = task_list.front();
+
+        for( int column = 0; column < 4; column++ )
         {
-            QVariant oVariant(task_list[row]);
 
-            // allocate the widget item
-            QTableWidgetItem * poItem = new QTableWidgetItem();
-            poItem->setData( Qt::DisplayRole, oVariant );
+            if(column == 0) {
+                QString typ;
+                switch(tmp_task->task_type) {
+                    case 0:
+                        typ = "Sleep";
+                        break;
+                    case 1:
+                        typ = "Wake up";
+                        break;
+                    case 2:
+                        typ = "Shut-down";
+                        break;
+                    case 3:
+                        typ = "Restart";
+                        break;
+                }
 
-            // insert into the table
-            ui->tableWidget->setItem(row, column, poItem );
+                QVariant data(typ);
+                // allocate the widget item
+                QTableWidgetItem * poItem = new QTableWidgetItem();
+                poItem->setData( Qt::DisplayRole, data );
+
+                // insert into the table
+                ui->tableWidget->setItem(row, column, poItem );
+            }
+            else if (column == 1) {
+                QVariant data(tmp_task->date_time.time());
+                // allocate the widget item
+                QTableWidgetItem * poItem = new QTableWidgetItem();
+                poItem->setData( Qt::DisplayRole, data );
+
+                // insert into the table
+                ui->tableWidget->setItem(row, column, poItem );
+            }
+            else if (column == 2) {
+                QVariant data(tmp_task->date_time.date());
+                // allocate the widget item
+                QTableWidgetItem * poItem = new QTableWidgetItem();
+                poItem->setData( Qt::DisplayRole, data );
+
+                // insert into the table
+                ui->tableWidget->setItem(row, column, poItem );
+            }
+            else {
+
+                QString typ;
+
+                switch(tmp_task->time_type) {
+                    case 10:
+                        typ = "Weekly";
+                        break;
+                    case 11:
+                        typ = "Daily";
+                        break;
+                    case 12:
+                        typ = "Specified time";
+                        break;
+                }
+
+                QVariant data(typ);
+                // allocate the widget item
+                QTableWidgetItem * poItem = new QTableWidgetItem();
+                poItem->setData( Qt::DisplayRole, data );
+
+                // insert into the table
+                ui->tableWidget->setItem(row, column, poItem );
+
+            }
+
         }
+
+        tmp_list.push_back(task_list.front());
+        task_list.pop_front();
+    }
+
+    for (int i = 0; i < tmp_list.size(); i++) {
+        task_list.push_back(tmp_list.front());
+        tmp_list.pop_front();
     }
 }
