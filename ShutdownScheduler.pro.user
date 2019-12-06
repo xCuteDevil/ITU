@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.10.2, 2019-12-06T19:58:00. -->
+<!-- Written by QtCreator 4.10.2, 2019-12-06T23:37:53. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -316,7 +316,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory">/Users/jan/Documents/School/3-1/ITU/build-ShutdownScheduler-Desktop_Qt_5_12_6_clang_64bit-Debug/</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/jan/Documents/School/3-1/ITU/build-ShutdownScheduler-Desktop_Qt_5_12_6_clang_64bit-Debug/ShutdownScheduler.app/Contents/MacOS</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>

@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "task.h"
 #include "tasksorter.h"
+#include "filewriter.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -53,22 +54,9 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->tableWidget->rowCount()-1
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-/*
-    for( int row = 0; row < 5; row++ )
-    {
-        for( int column = 0; column < 3; column++ )
-        {
-            QVariant oVariant("ahoj");
-
-            // allocate the widget item
-            QTableWidgetItem * poItem = new QTableWidgetItem();
-            poItem->setData( Qt::DisplayRole, oVariant );
-
-            // insert into the table
-            ui->tableWidget->setItem( row, column, poItem );
-        }
-    }
-*/
+    FileWriter f;
+    f.InitFromFile(&task_list);
+    ShowTasks();
 
 }
 
@@ -89,9 +77,11 @@ void MainWindow::DeleteItem()
 {
     /* Method removes selected TableWidget item */
     int selected = ui->tableWidget->currentRow();
-    ui->tableWidget->removeRow(selected);
+    task_list.at(selected)->is_active = false;
     task_list.erase(task_list.begin() + selected);
     ShowTasks();
+    FileWriter f;
+    f.WriteToFile(&task_list);
 }
 
 void MainWindow::DisableItem()
@@ -154,6 +144,9 @@ void MainWindow::RunTask() {
     task_list.push_back(task);
 
     ShowTasks();
+    FileWriter f;
+    f.WriteToFile(&task_list);
+
     QMessageBox::information(
     this,
     tr("ShutdownScheduler"),
@@ -210,6 +203,7 @@ void MainWindow::ShowTasks() {
 
     for (unsigned long row = 0; row < size; row++) {
 
+        ui->tableWidget->insertRow(ui->tableWidget->rowCount());
         for( int column = 0; column < 4; column++ )
         {
 
@@ -236,7 +230,6 @@ void MainWindow::ShowTasks() {
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
-                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
             else if (column == 1) {
@@ -246,7 +239,7 @@ void MainWindow::ShowTasks() {
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
-                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+                //ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
             else if (column == 2) {
@@ -256,7 +249,7 @@ void MainWindow::ShowTasks() {
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
-                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+                //ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
             else {
@@ -281,7 +274,7 @@ void MainWindow::ShowTasks() {
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
-                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+                //ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
 

@@ -3,6 +3,7 @@
 
 #include <QTime>
 #include <QObject>
+#include <string>
 
 class Task : public QObject{
 
@@ -22,12 +23,14 @@ public:
     };
 
     Task(QDateTime date_time, int task_type, int time_type);
-    void Activate();
+    void Activate(int task_type, bool is_active);
     void Deactivate();
-    static void Execute();
+    static void Execute(int task_type, bool is_active);
+    std::string GetInfo();
     int task_type;
     int time_type;
     QDateTime date_time;
+    bool is_active = false;
 
 public slots:
 
