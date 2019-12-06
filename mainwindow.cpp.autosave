@@ -169,7 +169,7 @@ void MainWindow::ShowTasks() {
 
         for( int column = 0; column < 3; column++ )
         {
-            QVariant oVariant(task_list[row]);
+            QVariant oVariant(task_list.);
 
             // allocate the widget item
             QTableWidgetItem * poItem = new QTableWidgetItem();

@@ -60,7 +60,10 @@
      <attribute name="title">
       <string>Setup</string>
      </attribute>
-     <widget class="QComboBox" name="comboBox">
+     <widget class="QComboBox" name="selectedDay">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -118,7 +121,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Save</string>
+       <string>Run</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
@@ -193,14 +196,14 @@
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
        <item>
-        <widget class="QRadioButton" name="radioButton_3">
+        <widget class="QRadioButton" name="weeklyRadio">
          <property name="text">
           <string>Weekly</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="dailyRadio">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -213,7 +216,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="radioButton">
+        <widget class="QRadioButton" name="specifyRadio">
          <property name="text">
           <string>Specified time</string>
          </property>
@@ -238,7 +241,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QRadioButton" name="radioButton_5">
+        <widget class="QRadioButton" name="sleepRadio">
          <property name="text">
           <string>Sleep</string>
          </property>
@@ -248,7 +251,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="radioButton_7">
+        <widget class="QRadioButton" name="wakeRadio">
          <property name="text">
           <string>Wake up</string>
          </property>
@@ -258,7 +261,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="radioButton_4">
+        <widget class="QRadioButton" name="shutdownRadio">
          <property name="text">
           <string>Shut down</string>
          </property>
@@ -268,7 +271,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="radioButton_8">
+        <widget class="QRadioButton" name="restartRadio">
          <property name="text">
           <string>Restart</string>
          </property>
@@ -320,7 +323,7 @@
        </date>
       </property>
      </widget>
-     <widget class="QTimeEdit" name="timeEdit_2">
+     <widget class="QTimeEdit" name="timeEdit">
       <property name="geometry">
        <rect>
         <x>310</x>
@@ -495,7 +498,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>radioButton_2</sender>
+   <sender>dailyRadio</sender>
    <signal>toggled(bool)</signal>
    <receiver>dateEdit</receiver>
    <slot>setDisabled(bool)</slot>
@@ -511,9 +514,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_2</sender>
+   <sender>dailyRadio</sender>
    <signal>toggled(bool)</signal>
-   <receiver>comboBox</receiver>
+   <receiver>selectedDay</receiver>
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -527,7 +530,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_3</sender>
+   <sender>weeklyRadio</sender>
    <signal>toggled(bool)</signal>
    <receiver>dateEdit</receiver>
    <slot>setDisabled(bool)</slot>
@@ -539,6 +542,22 @@
     <hint type="destinationlabel">
      <x>170</x>
      <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specifyRadio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>selectedDay</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>367</x>
+     <y>105</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>132</y>
     </hint>
    </hints>
   </connection>
