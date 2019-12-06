@@ -2,9 +2,9 @@
 #define TASK_H
 
 #include <QTime>
+#include <QObject>
 
-
-class Task {
+class Task : public QObject{
 
 public:
 
@@ -22,9 +22,14 @@ public:
     };
 
     Task(QDateTime date_time, int task_type, int time_type);
+    void Activate();
+    void Deactivate();
+    static void Execute();
     int task_type;
     int time_type;
     QDateTime date_time;
+
+public slots:
 
 };
 

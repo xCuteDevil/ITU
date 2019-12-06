@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    task.cpp
+    task.cpp \
+    tasksorter.cpp
 
 HEADERS += \
     mainwindow.h \
-    task.h
+    task.h \
+    tasksorter.h
 
 FORMS += \
     mainwindow.ui

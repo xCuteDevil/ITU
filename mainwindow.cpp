@@ -1,8 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "task.h"
+#include "tasksorter.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <QTimer>
 #include <QTime>
 #include <QString>
@@ -41,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(1000);
     connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(DeleteItem()));
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(RunTask()));
+    //connect(, SIGNAL(foo()), )
 
     //QTableWidgetItem *item=new QTableWidgetItem ("blaa");
     //ui->tableWidget->setItem(1, 1, item);
@@ -87,6 +90,8 @@ void MainWindow::DeleteItem()
     /* Method removes selected TableWidget item */
     int selected = ui->tableWidget->currentRow();
     ui->tableWidget->removeRow(selected);
+    task_list.erase(task_list.begin() + selected);
+    ShowTasks();
 }
 
 void MainWindow::DisableItem()
@@ -112,6 +117,7 @@ void MainWindow::RunTask() {
     switch (timeType) {
 
     case 10: //weekly
+
         selected_time = ui->timeEdit->time();
         date_time.setTime(selected_time);
 
@@ -119,19 +125,35 @@ void MainWindow::RunTask() {
         day = getDay(selectedDay);
         date_time.setDate(day);
 
-        task = new Task(date_time, taskType, timeType);
-        task_list.push_back(task);
-
         break;
     case 11: //daily
 
+        selected_time = ui->timeEdit->time();
+        date_time.setTime(selected_time);
+
+        day = QDate::currentDate();
+        if (QTime::currentTime() > selected_time) {
+            day = day.addDays(1);
+        }
+        date_time.setDate(day);
+
         break;
     case 12: //specific time
+
+        selected_time = ui->timeEdit->time();
+        date_time.setTime(selected_time);
+
+        day = ui->dateEdit->date();
+        date_time.setDate(day);
+
         break;
 
     }
 
-    this->ShowTasks();
+    task = new Task(date_time, taskType, timeType);
+    task_list.push_back(task);
+
+    ShowTasks();
     QMessageBox::information(
     this,
     tr("ShutdownScheduler"),
@@ -170,21 +192,30 @@ QDate MainWindow::getDay(int selectedDay) {
     return task_day;
 }
 
+void MainWindow::SortTasks() {
+    TaskSorter ts;
+    for (int i = 0; i < task_list.size(); i++) {
+        ts.AddObj(task_list.at(i));
+    }
+    task_list = ts.SortTasksByDate();
+}
+
 void MainWindow::ShowTasks() {
 
 
     ui->tableWidget->clear();
+    ui->tableWidget->setRowCount(0);
 
-    for (unsigned long row = 0; row < task_list.size(); row++) {
+    unsigned long size = task_list.size();
 
-        Task *tmp_task = task_list.front();
+    for (unsigned long row = 0; row < size; row++) {
 
         for( int column = 0; column < 4; column++ )
         {
 
             if(column == 0) {
                 QString typ;
-                switch(tmp_task->task_type) {
+                switch(task_list.at(row)->task_type) {
                     case 0:
                         typ = "Sleep";
                         break;
@@ -205,31 +236,34 @@ void MainWindow::ShowTasks() {
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
+                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
             else if (column == 1) {
-                QVariant data(tmp_task->date_time.time());
+                QVariant data(task_list.at(row)->date_time.time());
                 // allocate the widget item
                 QTableWidgetItem * poItem = new QTableWidgetItem();
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
+                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
             else if (column == 2) {
-                QVariant data(tmp_task->date_time.date());
+                QVariant data(task_list.at(row)->date_time.date());
                 // allocate the widget item
                 QTableWidgetItem * poItem = new QTableWidgetItem();
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
+                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
             }
             else {
 
                 QString typ;
 
-                switch(tmp_task->time_type) {
+                switch(task_list.at(row)->time_type) {
                     case 10:
                         typ = "Weekly";
                         break;
@@ -247,18 +281,12 @@ void MainWindow::ShowTasks() {
                 poItem->setData( Qt::DisplayRole, data );
 
                 // insert into the table
+                ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(row, column, poItem );
-
             }
 
         }
 
-        tmp_list.push_back(task_list.front());
-        task_list.pop_front();
     }
 
-    for (int i = 0; i < tmp_list.size(); i++) {
-        task_list.push_back(tmp_list.front());
-        tmp_list.pop_front();
-    }
 }

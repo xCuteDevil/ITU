@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QButtonGroup>
-#include <list>
+#include <vector>
 #include "task.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,8 +18,7 @@ public:
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    std::list<Task *> task_list;
-    std::list<Task *> tmp_list;
+    std::vector<Task *> task_list;
 
 private slots:
 
@@ -36,6 +35,8 @@ private slots:
     QDate getDay(int selectedDay);
 
     void ShowTasks();
+
+    void SortTasks();
 
 
 private:
