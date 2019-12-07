@@ -24,8 +24,7 @@ SOURCES += \
 HEADERS += \
     filewriter.h \
     mainwindow.h \
-    task.h \
-    tasksorter.h
+    task.h
 
 FORMS += \
     mainwindow.ui

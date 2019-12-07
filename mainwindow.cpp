@@ -98,7 +98,9 @@ void MainWindow::DeleteItem()
 }
 
 /*
- *
+ *  Called after saving new task, task is created, saved into task vector.
+ *  If task is created with time past current date and time, task is not created
+ *  and user is notified with pop-up window
  */
 void MainWindow::RunTask() {
 
@@ -170,6 +172,9 @@ void MainWindow::RunTask() {
     }
 }
 
+/*
+ *  Getting nearest date of new weekly task
+ */
 QDate MainWindow::getDay(int selectedDay) {
 
     QDate today = QDate::currentDate();
@@ -194,6 +199,9 @@ QDate MainWindow::getDay(int selectedDay) {
     return task_day;
 }
 
+/*
+ *  Recreates tablewidget in application with current tasks saved in task_vector
+ */
 void MainWindow::ShowTasks() {
 
 
