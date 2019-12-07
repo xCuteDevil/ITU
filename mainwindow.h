@@ -26,17 +26,11 @@ private slots:
 
     void DeleteItem();
 
-    void DisableItem();
-
-    void EnableItem();
-
     void RunTask();
 
     QDate getDay(int selectedDay);
 
     void ShowTasks();
-
-    void SortTasks();
 
 
 private:

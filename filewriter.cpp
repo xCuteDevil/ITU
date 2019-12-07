@@ -4,11 +4,18 @@
 #include <QTextStream>
 #include <string>
 
+/*
+ *  FileWriter serves as class for writing tasks to file after creation
+ *  and reading tasks from file after running the application
+ *
+ */
 FileWriter::FileWriter()
 {
 
 }
-
+/*
+ *  Reads all actual tasks and writes them into file tasks.txt
+ */
 void FileWriter::WriteToFile(std::vector<Task *> *tasks) {
     QString fn = "tasks.txt";
     QFile file(fn);
@@ -22,6 +29,9 @@ void FileWriter::WriteToFile(std::vector<Task *> *tasks) {
     }
 }
 
+/*
+ *  Reads all tasks from file tasks.txt, creates them, appends them to task vector and activate each one
+ */
 void FileWriter::InitFromFile(std::vector<Task *> *tasks) {
     QString fn = "tasks.txt";
     QFile file(fn);
@@ -36,6 +46,9 @@ void FileWriter::InitFromFile(std::vector<Task *> *tasks) {
     }
 }
 
+/*
+ *  Parsing text file and handling task creation
+ */
 void FileWriter::CreateTask(std::vector<Task *> *tasks, QString line) {
     std::string str = line.toStdString();
     std::string day = str.substr(0,2);
@@ -50,11 +63,14 @@ void FileWriter::CreateTask(std::vector<Task *> *tasks, QString line) {
     QDateTime dt;
     QDate date;
     QTime time;
+
     date.setDate(std::stoi(year), std::stoi(month), std::stoi(day));
-    time.fromString(time_q, "hh:mm");
+    time = time.fromString(time_q, "hh:mm");
     dt.setDate(date);
     dt.setTime(time);
-
+    if (date <= QDate::currentDate() && time < QTime::currentTime()) {
+        return;
+    }
     Task *task;
     task = new Task(dt, std::stoi(taskType), std::stoi(timeType));
     tasks->push_back(task);

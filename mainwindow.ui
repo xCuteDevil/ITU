@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>425</width>
-    <height>206</height>
+    <width>500</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>425</width>
-    <height>200</height>
+    <width>500</width>
+    <height>300</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>425</width>
-    <height>500</height>
+    <width>500</width>
+    <height>300</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -29,16 +29,16 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>3</x>
-      <y>3</y>
-      <width>420</width>
-      <height>200</height>
+      <x>0</x>
+      <y>0</y>
+      <width>500</width>
+      <height>300</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>420</width>
-      <height>200</height>
+      <width>500</width>
+      <height>300</height>
      </size>
     </property>
     <property name="maximumSize">
@@ -48,7 +48,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -62,13 +62,13 @@
      </attribute>
      <widget class="QComboBox" name="selectedDay">
       <property name="enabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>130</x>
-        <y>90</y>
-        <width>111</width>
+        <x>300</x>
+        <y>150</y>
+        <width>141</width>
         <height>22</height>
        </rect>
       </property>
@@ -114,91 +114,49 @@
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>120</y>
-        <width>75</width>
-        <height>23</height>
+        <x>344</x>
+        <y>212</y>
+        <width>101</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
        <string>Run</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>150</y>
-        <width>141</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Your device will be</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>150</y>
-        <width>111</width>
-        <height>16</height>
+        <x>150</x>
+        <y>216</y>
+        <width>121</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
        <string>11:15:49 20.10.2019</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>150</y>
-        <width>151</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string> shut down today at 22:00.</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Next task:</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>130</x>
-        <y>59</y>
+        <x>150</x>
+        <y>100</y>
         <width>281</width>
         <height>31</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,4,0">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,4,0">
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
        <item>
-        <widget class="QRadioButton" name="weeklyRadio">
+        <widget class="QRadioButton" name="specifyRadio">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
-          <string>Weekly</string>
+          <string>Specified time</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -219,9 +177,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="specifyRadio">
+        <widget class="QRadioButton" name="weeklyRadio">
          <property name="text">
-          <string>Specified time</string>
+          <string>Weekly</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -233,10 +191,10 @@
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
+        <x>30</x>
+        <y>0</y>
         <width>111</width>
-        <height>111</height>
+        <height>241</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -284,12 +242,12 @@
      </widget>
      <widget class="QDateEdit" name="dateEdit">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>130</x>
-        <y>10</y>
+        <x>150</x>
+        <y>20</y>
         <width>173</width>
         <height>47</height>
        </rect>
@@ -332,8 +290,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>10</y>
+        <x>350</x>
+        <y>20</y>
         <width>100</width>
         <height>47</height>
        </rect>
@@ -356,6 +314,19 @@
        </time>
       </property>
      </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>40</y>
+        <width>31</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -366,8 +337,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>401</width>
-        <height>161</height>
+        <width>471</width>
+        <height>251</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -376,6 +347,9 @@
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>113</number>
+         </attribute>
          <row>
           <property name="text">
            <string/>
@@ -431,6 +405,9 @@
             <bold>false</bold>
            </font>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
          </column>
          <column>
           <property name="text">
@@ -476,29 +453,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,5">
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Remind me</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="spinBox">
-           <property name="value">
-            <number>5</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>minutes before each task.</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QHBoxLayout" name="horizontalLayout_2"/>
        </item>
       </layout>
      </widget>

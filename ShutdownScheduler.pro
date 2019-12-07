@@ -19,8 +19,7 @@ SOURCES += \
     filewriter.cpp \
     main.cpp \
     mainwindow.cpp \
-    task.cpp \
-    tasksorter.cpp
+    task.cpp
 
 HEADERS += \
     filewriter.h \

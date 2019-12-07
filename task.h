@@ -23,9 +23,9 @@ public:
     };
 
     Task(QDateTime date_time, int task_type, int time_type);
-    void Activate(int task_type, bool is_active);
+    void Activate(int task_type);
     void Deactivate();
-    static void Execute(int task_type, bool is_active);
+    static void Execute(int task_type, Task *task);
     std::string GetInfo();
     int task_type;
     int time_type;
